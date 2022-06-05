@@ -12,18 +12,23 @@ var city = $("#search-input");
 
 function makeApiCall (city){ // Add city, state, country
     var oneCallUrl = 'api.openweathermap.org/data/2.5/weather?q=' + city + '&appid='+ APIkey;
-    // var format =
+    var city = $('#search-input').val();
+    // var format = '&units=imperial
 
-  if (city) {
-    oneCallUrl = 'https://www.loc.gov/' + city + '/?fo=json';
-  } 
+//   if (city) {
+//     oneCallUrl += '?q=' + city + format + '&appid='+ APIkey;
+//   } 
     
-
-    //oneCallUrl = oneCallUrl + '&q=' + query;
-  oneCallUrl = oneCallUrl + '&execute=' + format;
-
   $.ajax({
-      type: "GET",
-      url: "https://api.openweathermap.org/data/2.5/",
-  })
+      type: 'GET',
+      url: oneCallUrl,
+      success: function(response){
+        resultText.textContent = response.search.city;
+        console.log(response)
+      },
+      error: function(){
+          alert("No results found, search again")
+      },
+    })
+
 }
