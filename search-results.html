@@ -23,6 +23,12 @@
 </head>
 <body>
 
+    <header class="jumbotron bg-primary">
+        <h1 class="display-3">Weather Forecast</h1>
+        <p class="lead">Simply Search for any City, and get the Weather Forecast</p>
+        <p id="currentDay" class="lead"></p>
+    </header>
+
     <!-- search form  -->
     <aside class="container fluid border">
         <div class="row">
@@ -30,19 +36,19 @@
                 <h1 class="text-primary mb-4">Weather Search</h1>
                 <form id="search-form">
                     <input id="search-input" type="text" placeholder="Search City">
-                    <button>Let's Go</button>
+                    <button id="search-btn">Let's Go</button>
                 </form>
             </div>
         </div>
     </aside>
     <!-- results form -->
-    <div class="col-12 col-md-9 p-3 text-light">
+    <div class="col-12 col-md-9 p-3">
         <h2>Showing Current Weather results for <span id="result-text"></span></h2>
         <div id="result-content"></div>
       </div>
     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="script.js"></script>
+    <script src="search-results.js"></script>
 </body>
 </html>

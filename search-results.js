@@ -2,7 +2,7 @@ var searchForm = $("#search-form");
 var resultText = $("#result-text");
 var resultContent = $("#result-content");
 var APIkey = "136aa9e29b79e1c372c1123d2de62d07";
-// var city = $("#search-input").val();
+var city = $("#search-input").val();
 
 // function getFormats(){
 //     var getParametersArr = document.location.search.split("&");
@@ -11,56 +11,39 @@ var APIkey = "136aa9e29b79e1c372c1123d2de62d07";
 
 // }
 
-function getResults(resultObj){
+function getResults(){
     console.log(resultObj);
 
-    var resultCard = $('div');
-    resultCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
-
-    var resultCardBody = $('div');
-    resultCardBody.classList.add('card-body');
-    resultCard.append(resultCardBody);
-
-    var title = $('h3');
-    title.textContent = resultObj.name; // ex. "name": "London"
-
-    var bodyMainContent = $('p');
-    bodyMainContent.innerHTML =
-    '<strong>Date:</strong> ' + resultObj.date + '<br/>';
     
-    if (resultObj.description) {
-        bodyMainContent.innerHTML +=
-          '<strong>Description:</strong> ' + resultObj.description[0];
-    } else {
-        bodyMainContent.innerHTML +=
-          '<strong>Description:</strong>  No description for this entry.';
-    }
-
-    if (resultObj.subject) {
-        bodyMainContent.innerHTML +=
-          '<strong>Subjects:</strong> ' + resultObj.subject.join(', ') + '<br/>';
-    } else {
-        bodyMainContent.innerHTML +=
-          '<strong>Subjects:</strong> No subject for this entry.';
-    }
+    
 }
 
 
 function makeApiCall (city){ // Add city, state, country
-    var oneCallUrl = 'https://api.openweathermap.org/data/2.5/weather' 
+    debugger
     // var city = $('#search-input').val();
-    // var format = '&units=imperial&
-
-//   if (city) {
-//     oneCallUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid='+ APIkey;
-//   } 
+    var template = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=imperial`
+  
     
   $.ajax({
       type: 'GET',
-      url: oneCallUrl,
+      url: template,
       success: function(response){
-        resultText.textContent = response.search.city;
-        console.log(response)
+        var temp = $('<div>')
+        temp.text(`Temperature: ${response.main.temp}`)
+        resultContent.append(temp);
+        var humidity = $('<div>')
+        humidity.text(`Humidity: ${response.main.humidity}`)
+        resultContent.append(humidity);
+        var wind = $('<div>')
+        wind.text(`Wind Speed: ${response.wind.speed}`)
+        resultContent.append(wind);
+        var name = $('<div>')
+        name.text(`Name: ${response.name}`)
+        resultContent.append(name);
+        var uvi = $('<div>')
+        uvi.text(`Name: ${response.current.uvi}`)
+        resultContent.append(name);
       },
       error: function(){
           alert("No results found, search again")
@@ -68,3 +51,22 @@ function makeApiCall (city){ // Add city, state, country
     })
 
 }
+
+$("#search-btn").on('click', function (event) {
+    event.preventDefault();
+    debugger
+    var city = $('#search-input').val();
+
+    if (!city) {
+    alert('You must enter a city');
+    return;
+    } else {
+        makeApiCall(city)
+    }
+
+    
+
+    
+})
+
+
