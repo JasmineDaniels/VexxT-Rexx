@@ -1,60 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  />
-  <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-    crossorigin="anonymous
-  />
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css"/>
-    <title>Results | Weather Search</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+            integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+            crossorigin="anonymous"
+        />
+        <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css"/>
+            <title>Results | Weather Search</title>
+    </head>
+    <body>
 
-    <header class="jumbotron bg-primary">
-        <h1 class="display-3">Weather Forecast</h1>
-        <p class="lead">Simply Search for any City, and get the Weather Forecast</p>
-        <p id="currentDay" class="lead"></p>
-    </header>
+        <header class="jumbotron bg-primary text-center">
+            <h1 class="display-3">Weather Forecast</h1>
+            <p class="lead">Simply Search for any City, and get the Weather Forecast</p>
+            <p id="currentDay" class="lead"></p>
+        </header>
 
-    <!-- search form  -->
-    <aside class="container fluid border">
-        <div class="row">
-            <div class="form">
-                <h1 class="text-primary mb-4">Weather Search</h1>
-                <form id="search-form">
-                    <input id="search-input" type="text" placeholder="Search City">
-                    <button id="search-btn">Let's Go</button>
-                </form>
+        <!-- search form  -->
+        <div class="container fluid border">
+            <div class="row">
+                <div class="form">
+                    <h1 class="text-primary mb-4">Weather Search</h1>
+                    <form id="search-form">
+                        <input id="search-input" type="text" placeholder="Search City">
+                        <button id="search-btn">Let's Go</button>
+                    </form>
+                </div>
+            </div>
+        
+        </div>
+        <!-- results form -->
+        <div class="container my-4">
+            <h2>Showing Current Weather results for <span id="result-text"></span></h2>
+            <div id="result-content" class="card"></div
+        </div>
+        
+
+        <div class="container my-4">
+            <h2>Showing Weather Forecast results for <span id="5D-result-text"></span></h2>
+            <div id="result-5Dcontent" class="row">
+                <div id="day1" class="card mx-2 p-2"></div>
+                <div id="day2" class="card mx-2 p-2"></div>
+                <div id="day3" class="card mx-2 p-2"></div>
+                <div id="day4" class="card mx-2 p-2"></div>
             </div>
         </div>
-    </aside>
-    <!-- results form -->
-    <div class="col-12 col-md-9 p-3">
-        <h2>Showing Current Weather results for <span id="result-text"></span></h2>
-        <div id="result-content"></div
-        <div id="result-5Dcontent">
-            <div id="day1"></div>
-            <div id="day2"></div>
-            <div id="day3"></div>
-            <div id="day4"></div>
-        </div>
-    </div>
-    
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="search-results.js"></script
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="search-results.js"></script
+    </body>
 </html>
