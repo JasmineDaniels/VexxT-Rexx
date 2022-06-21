@@ -1,146 +1,117 @@
 var searchForm = $("#search-form");
-var resultText = $("#result-text");
-var resultsText = $("#5D-result-text");
+// var resultText = $("#result-text");
+// var resultsText = $("#5D-result-text");
 var resultContent = $("#result-content");
 var result5DContent = $("#result-5Dcontent");
 var APIkey = "136aa9e29b79e1c372c1123d2de62d07";
 var APIKey2 = "c12ef798071d2e2a50287915493f1331"
-var city = $("#search-input").val();
 var dayOne = $("#day1")
 var dayTwo = $("#day2")
 var dayThree = $("#day3")
 var dayFour = $("#day4")
 
 
+
 function getCurrentResults(response){
-    resultText.text(city)
+    // resultText.text(city)
 
     if (response){
-        var currentCardBody = $('<div/>'); // new div
-        currentCardBody.attr('card-body');
-        currentCardBody.attr('style', 'text-align: center')
-        resultContent.append(currentCardBody);
-
-        // current weather response  
-        var name = $('<p>')
-        name.text(`City: ${response.name}`)
-        currentCardBody.append(name);
-        var humidity = $('<p>')
-        humidity.text(`Humidity: ${response.main.humidity}`)
-        currentCardBody.append(humidity);
-        var temp = $('<p>')
-        temp.text(`Temperature: ${response.main.temp}`)
-        currentCardBody.append(temp);
-        var wind = $('<p>')
-        wind.text(`Wind Speed: ${response.wind.speed}`)
-        currentCardBody.append(wind);
-        var desc = $('<p>')
-        desc.text(`Weather Conditions: ${response.weather[0].description}`)
-        currentCardBody.append(desc); 
-        // var icon = $('<p>')
-        // icon.text(`Icon: ${response.weather[0].icon}`)
-        // currentCardBody.append(icon);
-
-        resultContent.append(currentCardBody)
         
+        var headerCurrent = $('#header-current')
+        var currentHeader = $(`<h2>Showing Current Weather results for <span>${response.name}</span></h2>`)
+        headerCurrent.prepend(currentHeader)
+        // current weather response  
+        var currentData = $(`<p>City: <strong>${response.name}</strong></p>
+        <p>Humidity: <strong>${response.main.humidity}</strong></p>
+        <p>Temperature: <strong>${response.main.temp}°F</strong></p>
+        <p>Wind Speed: <strong>${response.wind.speed}</strong></p>
+        <p>Weather: <strong>${response.weather[0].description}</strong></p>
+        <p>Icon: <img src="http://openweathermap.org/img/wn/${response.weather[0].icon}@2x.png"></p>`);
+        currentData.attr('style', 'text-align: center')
+        resultContent.append(currentData)
+
     };
 }
 
 function getForecastResults (response){
-    resultsText.text(city)
-
+    // resultsText.text(city)
+    
     if (response) {
         // Forecast Day 1
-        var day1CardBody = $('<div/>'); // new div
-        day1CardBody.attr('card-body');
-        dayOne.append(day1CardBody);
+        // var day1CardBody = $('<div/>'); // new div
+        var header5D = $('#header-5Dcontent')
+        var forecast = (`<h2>Showing Weather Forecast results for <span> ${response.city.name}</span></h2>`)
+        header5D.prepend(forecast)
 
-        var dayOneName = $('<p>')
-        dayOneName.text(`City: ${response.city.name}`)
-        day1CardBody.append(dayOneName);
-        var dayOneHumidity = $('<p>')
-        dayOneHumidity.text(`Humidity: ${response.list[0].main.humidity}`)
-        day1CardBody.append(dayOneHumidity); 
-        var dayOneTemp = $('<p>')
-        dayOneTemp.text(`Temperature: ${response.list[0].main.temp}`)
-        day1CardBody.append(dayOneTemp);
-        var dayOneWind = $('<p>')
-        dayOneWind.text(`Wind Speed: ${response.list[0].wind.speed}`)
-        day1CardBody.append(dayOneWind); 
-        var dayOneWeather = $('<p>')
-        dayOneWeather.text(`Weather: ${response.list[0].weather[0].description}`)
-        day1CardBody.append(dayOneWeather);
+        var dayOneData = $(`<p>City: <strong>${response.city.name}</strong></p>
+        <p>Humidity: <strong>${response.list[0].main.humidity}</strong></p>
+        <p>Temperature: <strong>${response.list[0].main.temp}°F</strong></p>
+        <p>Wind Speed: <strong>${response.list[0].wind.speed}</strong></p>
+        <p>Weather: <strong>${response.list[0].weather[0].description}</strong></p>
+        <p>Icon: <img src="http://openweathermap.org/img/wn/${response.list[0].weather[0].icon}@2x.png"></p>`);
+        dayOne.append(dayOneData) 
+
 
         // Forecast Day Two
-        var dayTwoCardBody = $('<div/>'); 
-        dayTwoCardBody.attr('card-body');
-        dayTwo.append(dayTwoCardBody);
-
-        var dayTwoName = $('<p>')
-        dayTwoName.text(`City: ${response.city.name}`)
-        dayTwoCardBody.append(dayTwoName);
-        var dayTwoHumidity = $('<p>')
-        dayTwoHumidity.text(`Humidity: ${response.list[12].main.humidity}`)
-        dayTwoCardBody.append(dayTwoHumidity); 
-        var dayTwoTemp = $('<p>')
-        dayTwoTemp.text(`Temperature: ${response.list[12].main.temp}`)
-        dayTwoCardBody.append(dayTwoTemp);
-        var dayTwoWind = $('<p>')
-        dayTwoWind.text(`Wind Speed: ${response.list[12].wind.speed}`)
-        dayTwoCardBody.append(dayTwoWind); 
-        var dayTwoWeather = $('<p>')
-        dayTwoWeather.text(`Weather: ${response.list[12].weather[0].description}`)
-        dayTwoCardBody.append(dayTwoWeather);
-
+        var dayTwoData = $(`<p> City: <strong>${response.city.name}</strong></p>
+        <p>Humidity: <strong>${response.list[12].main.humidity}</strong></p>
+        <p>Temperature: <strong>${response.list[12].main.temp}°F</strong></p>
+        <p>Wind Speed: <strong>${response.list[12].wind.speed}</strong></p>
+        <p>Weather: <strong>${response.list[12].weather[0].description}</strong></p>
+        <p>Icon: <img src="http://openweathermap.org/img/wn/${response.list[12].weather[0].icon}@2x.png"></p>`)
+        dayTwo.append(dayTwoData);
+        
         // Forecast Day 3
-        var dayThreeCardBody = $('<div/>'); 
-        dayThreeCardBody.attr('card-body');
-        dayThree.append(dayThreeCardBody);
-
-        var dayThreeName = $('<p>')
-        dayThreeName.text(`City: ${response.city.name}`)
-        dayThreeCardBody.append(dayThreeName);
-        var dayThreeHumidity = $('<p>')
-        dayThreeHumidity.text(`Humidity: ${response.list[32].main.humidity}`)
-        dayThreeCardBody.append(dayThreeHumidity); 
-        var dayThreeTemp = $('<p>')
-        dayThreeTemp.text(`Temperature: ${response.list[32].main.temp}`)
-        dayThreeCardBody.append(dayThreeTemp);
-        var dayThreeWind = $('<p>')
-        dayThreeWind.text(`Wind Speed: ${response.list[32].wind.speed}`)
-        dayThreeCardBody.append(dayThreeWind); 
-        var dayThreeWeather = $('<p>')
-        dayThreeWeather.text(`Weather: ${response.list[32].weather[0].description}`)
-        dayThreeCardBody.append(dayThreeWeather);
+        var dayThreeData = $(`<p>City: <strong>${response.city.name}</strong></p>
+        <p>Humidity: <strong>${response.list[32].main.humidity}</strong></p>
+        <p>Temperature: <strong>${response.list[32].main.temp}</strong></p>
+        <p>Wind Speed: <strong>${response.list[32].wind.speed}</strong></p>
+        <p>Weather: <strong>${response.list[32].weather[0].description}</strong></p>
+        <p>Icon: <img src="http://openweathermap.org/img/wn/${response.list[32].weather[0].icon}@2x.png"></p>`)
+        dayThree.append(dayThreeData);
 
         // Forecast Day 4
-        var dayFourCardBody = $('<div/>'); 
-        dayFourCardBody.attr('card-body');
-        dayFour.append(dayFourCardBody);
+        var dayFourData = $(`<p>City: <strong>${response.city.name}</strong></p>
+        <p>Humidity: <strong>${response.list[39].main.humidity}</strong></p>
+        <p>Temperature: <strong>${response.list[39].main.temp}</strong></p>
+        <p>Wind Speed: <strong>${response.list[39].wind.speed}</strong></p>
+        <p>Weather: <strong>${response.list[39].weather[0].description}</strong></p>
+        <p>Icon: <img src="http://openweathermap.org/img/wn/${response.list[39].weather[0].icon}@2x.png"></p>`)
+        dayFour.append(dayFourData);
 
-        var dayFourName = $('<p>')
-        dayFourName.text(`City: ${response.city.name}`)
-        dayFourCardBody.append(dayFourName);
-        var dayFourHumidity = $('<p>')
-        dayFourHumidity.text(`Humidity: ${response.list[39].main.humidity}`)
-        dayFourCardBody.append(dayFourHumidity); 
-        var dayFourTemp = $('<p>')
-        dayFourTemp.text(`Temperature: ${response.list[39].main.temp}`)
-        dayFourCardBody.append(dayFourTemp);
-        var dayFourWind = $('<p>')
-        dayFourWind.text(`Wind Speed: ${response.list[39].wind.speed}`)
-        dayFourCardBody.append(dayFourWind); 
-        var dayFourWeather = $('<p>')
-        dayFourWeather.text(`Weather: ${response.list[39].weather[0].description}`)
-        dayFourCardBody.append(dayFourWeather);
     };
+}
+ 
+// Local Storage
+function savedSearch (){
+    // the search value
+    var city = $("#search-input").val();
+    // is there something in local storage that has "this Item" (recentSearch)
+    var searchHistory = JSON.parse(localStorage.getItem('recentSearch')) // we want searchHistroy to equal whats in ls with the keyname "recentSearch" 
+
+    if (searchHistory){ //if something is in local storage called 'recentSearch'
+        searchHistory.push(city) //push new search(city) into the Array
+        localStorage.setItem('recentSearch', JSON.stringify(searchHistory))
+    } else { // if nothing in ls is called 'recentSearch'
+        searchHistory = [city]  // searchHistory = an Array with the value of the search (city)
+        localStorage.setItem('recentSearch', JSON.stringify(searchHistory))
+    } // NOW 'recentSearch' is an array 
+
+    // var recentBtn = $('button')
+    // var recentSearch = $("#recent-search")
+    // recentBtn.html(city)
+    // // Append Result Content to to recent Button
+    // recentSearch.append(recentBtn)
 }
 
 
-function makeApiCall (city){ // Add city, state, country
+function makeApiCall (city){ 
+    // Current Data
     var template = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=imperial`
-    // 5D Forecast Data 
+    // Forecast Data 
     var templateTwo = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey2}&units=imperial`
+
+    // var templateThree = `http://openweathermap.org/img/wn/${response.list[0].weather[0].icon}@2x.png`
         
   $.ajax({
       type: 'GET',
@@ -148,6 +119,7 @@ function makeApiCall (city){ // Add city, state, country
       success: function(response){
         console.log(response)
         getCurrentResults(response)
+        savedSearch()
       },
       error: function(){
           console.error("No results found, search again");
@@ -167,6 +139,7 @@ function makeApiCall (city){ // Add city, state, country
 });
 }
 
+//When search button is clicked, Make API Call 
 $("#search-btn").on('click', function (event) {
     event.preventDefault();
     var city = $('#search-input').val();
