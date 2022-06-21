@@ -87,7 +87,8 @@ function savedSearch (){
     // the search value
     var city = $("#search-input").val();
     // is there something in local storage that has "this Item" (recentSearch)
-    var searchHistory = JSON.parse(localStorage.getItem('recentSearch')) // we want searchHistroy to equal whats in ls with the keyname "recentSearch" 
+    // we want searchHistroy to equal whats in ls with the keyname "recentSearch" 
+    var searchHistory = JSON.parse(localStorage.getItem('recentSearch')) 
 
     if (searchHistory){ //if something is in local storage called 'recentSearch'
         searchHistory.push(city) //push new search(city) into the Array
