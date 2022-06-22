@@ -17,9 +17,8 @@ function getCurrentResults(response){
 
     if (response){
         
-        var headerCurrent = $('#header-current')
-        var currentHeader = $(`<h2>Showing Current Weather results for <span>${response.name}</span></h2>`)
-        headerCurrent.prepend(currentHeader)
+        $('#current-title').text(`Showing Current Weather results for ${response.name}`)
+        // headerCurrentEl.prepend(currentHeader)
         // current weather response  
         var currentData = $(`<p>City: <strong>${response.name}</strong></p>
         <p>Humidity: <strong>${response.main.humidity}</strong></p>
@@ -39,9 +38,8 @@ function getForecastResults (response){
     if (response) {
         // Forecast Day 1
         // var day1CardBody = $('<div/>'); // new div
-        var header5D = $('#header-5Dcontent')
-        var forecast = (`<h2>Showing Weather Forecast results for <span> ${response.city.name}</span></h2>`)
-        header5D.prepend(forecast)
+        $('#5d-title').text(`Showing Weather Forecast results for ${response.city.name}`)
+        // header5D.prepend(forecast)
 
         var dayOneData = $(`<p>City: <strong>${response.city.name}</strong></p>
         <p>Humidity: <strong>${response.list[0].main.humidity}</strong></p>
@@ -98,12 +96,31 @@ function savedSearch (){
         localStorage.setItem('recentSearch', JSON.stringify(searchHistory))
     } // NOW 'recentSearch' is an array 
 
-    // var recentBtn = $('button')
-    // var recentSearch = $("#recent-search")
-    // recentBtn.html(city)
-    // // Append Result Content to to recent Button
-    // recentSearch.append(recentBtn)
+    var recentBtn = $('<button/>')
+    recentBtn.text(city)
+    recentBtn.attr('class', 'btn btn-primary mx-2')
+    recentBtn.on('click', function(event){
+        makeApiCall($(this).text()) // event.target
+    }) 
+    $("#recent-value").append(recentBtn)
 }
+
+// function createSearchButton (){
+//     // i = searchHistory.length
+//     for (let i = 0; i < localStorage.length; i++) {
+//         // const element = array[i];
+//         if (searchHistory){
+//             $('<button/>', {
+//                 html: i,
+//                 id: 'btn_'+i,
+//                 click: function (){
+                    
+//                 }
+//             })
+//         }
+        
+//     }
+// }
 
 
 function makeApiCall (city){ 
@@ -111,9 +128,12 @@ function makeApiCall (city){
     var template = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIkey}&units=imperial`
     // Forecast Data 
     var templateTwo = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${APIKey2}&units=imperial`
-
-    // var templateThree = `http://openweathermap.org/img/wn/${response.list[0].weather[0].icon}@2x.png`
-        
+    resultContent.empty()
+    dayOne.empty()
+    dayTwo.empty()
+    dayThree.empty()
+    dayFour.empty()
+    
   $.ajax({
       type: 'GET',
       url: template,
@@ -121,6 +141,7 @@ function makeApiCall (city){
         console.log(response)
         getCurrentResults(response)
         savedSearch()
+        
       },
       error: function(){
           console.error("No results found, search again");
@@ -138,6 +159,7 @@ function makeApiCall (city){
         console.error("No results found, search again");
     },
 });
+
 }
 
 //When search button is clicked, Make API Call 
