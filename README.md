@@ -3,9 +3,9 @@ Weather Search is an app that retrieves the Current and Forecast Weather Results
 
 ## How to Use Weather Search
 
-**1. Simply Enter any City**
-**2. Press Let's Go**
-**3. And You're Done!!**
+1. **Simply Enter any City**
+2. **Press Let's Go**
+3. **And You're Done!!**
 
 *Any Results you need to revisit?*
 
